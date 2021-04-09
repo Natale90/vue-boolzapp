@@ -3,11 +3,12 @@ function init(){
 
 
   new Vue({
-    
+
     el: '#app',
 
     data: {
-
+      'lastMess':'',
+      'lastDate':'',
       'mypic': 'img/profile_pic.jpg',
       contacts: [
 
@@ -107,6 +108,7 @@ function init(){
     },
 
     methods:{
+
 
     },
 

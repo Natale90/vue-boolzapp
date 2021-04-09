@@ -38,11 +38,31 @@
               <i class="far fa-window-close"></i>
             </div>
           </div>
-          <div class="header_left">
-            <img class="profile_pic" :src='mypic' alt="">
-          </div>
-          <div class="header_right">
 
+          <div class="header_left">
+            <div  class="profile_pic_cont">
+              <img class="profile_pic" :src='mypic' alt="">
+            </div>
+            <div class="">
+              <i class="fas fa-plus"></i>
+              <i class="fas fa-ellipsis-h"></i>
+            </div>
+          </div>
+
+          <div class="header_right">
+            <div class="liveChat">
+
+            </div>
+            <div class="chatOpts">
+              <div class="">
+                <img src="" alt="">
+              </div>
+              <span></span>
+              <div class="">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-ellipsis-h"></i>                
+              </div>
+            </div>
           </div>
         </header>
 
@@ -54,13 +74,15 @@
               <i class="fas fa-search"></i>
               <input id="find-chat" type="text" name="" value="" placeholder="cerca o inizia una nuova chat">
             </div>
+            <!-- lista contatti-->
             <ul>
-              <li v-for='(contact, index) in contacts'>
-                <img class="profile_pic" :src="contact.avatar" alt="">
-                <span class="contact-name">{{contact.name}}</span>
+              <li v-for='(elem, index) in contacts'>
+                <img class="profile_pic" :src="elem.avatar" alt="">
+                <span class="contact-name">{{elem.name}}</span>
+                <span></span>
               </li>
             </ul>
-
+            <!-- finde della lista contatti-->
           </div>
 
           <div id="chat">
@@ -76,7 +98,7 @@
 
       </div>
 
-    </div><!--fine del bic_container-->
+    </div><!--fine del big_container-->
 
 
   </body>
