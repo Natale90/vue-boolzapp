@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- link to media query meta -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- link to google font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+    <!-- link to fontawsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <!-- link to jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <!-- link to vue js cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>Lezione 08-04-2021</title>
+
+    <!-- link to main script file -->
+    <script src="js/script.js" type="text/javascript"></script>
+    <!-- link to css style -->
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+
+    <div class="big_container">
+      <div class="big_top_bar"></div>
+
+      <div id="app" class="container">
+
+        <header class="clearfix">
+          <div class="topbar">
+            <div>WhatsApp</div>
+            <div class="opts">
+              <i class="far fa-window-minimize"></i>
+              <i class="far fa-window-maximize"></i>
+              <i class="far fa-window-close"></i>
+            </div>
+          </div>
+          <div class="header_left">
+            <img class="profile_pic" :src='mypic' alt="">
+          </div>
+          <div class="header_right">
+
+          </div>
+        </header>
+
+        <main>
+
+          <div id="contacts_list">
+
+            <div class="search-chat">
+              <i class="fas fa-search"></i>
+              <input id="find-chat" type="text" name="" value="" placeholder="cerca o inizia una nuova chat">
+            </div>
+            <ul>
+              <li v-for='(contact, index) in contacts'>
+                <img class="profile_pic" :src="contact.avatar" alt="">
+                <span class="contact-name">{{contact.name}}</span>
+              </li>
+            </ul>
+
+          </div>
+
+          <div id="chat">
+            <div class="text-input">
+              <i class="far fa-grin-alt"></i>
+              <i class="fas fa-paperclip"></i>
+              <input id="typer" type="text" name="" value="" placeholder="scrivi un messaggio">
+              <i class="fas fa-microphone"></i>
+            </div>
+          </div>
+
+        </main>
+
+      </div>
+
+    </div><!--fine del bic_container-->
+
+
+  </body>
+</html>
