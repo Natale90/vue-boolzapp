@@ -27,7 +27,7 @@
     <div class="big_container">
       <div class="big_top_bar"></div>
 
-      <div id="app" class="container">
+      <div id="app" class="container"> <!-- VueJs Container-->
 
         <header class="clearfix">
           <div class="topbar">
@@ -50,18 +50,17 @@
           </div>
 
           <div class="header_right">
+            <!--active chat-->
             <div class="liveChat">
-
+              <img class="profile_pic" :src="activeElem.avatar" alt="">
+              <span>{{activeElem.name}}</span>
             </div>
             <div class="chatOpts">
               <div class="">
-                <img src="" alt="">
-              </div>
-              <span></span>
-              <div class="">
                 <i class="fas fa-search"></i>
-                <i class="fas fa-ellipsis-h"></i>                
+                <i class="fas fa-ellipsis-h"></i>
               </div>
+              <!--end of active chat-->
             </div>
           </div>
         </header>
@@ -72,31 +71,61 @@
 
             <div class="search-chat">
               <i class="fas fa-search"></i>
-              <input id="find-chat" type="text" name="" value="" placeholder="cerca o inizia una nuova chat">
+              <input id="find-chat" type="text" value="" placeholder="cerca o inizia una nuova chat">
             </div>
             <!-- lista contatti-->
-            <ul>
-              <li v-for='(elem, index) in contacts'>
-                <img class="profile_pic" :src="elem.avatar" alt="">
-                <span class="contact-name">{{elem.name}}</span>
-                <span></span>
-              </li>
-            </ul>
+            <div id="chat_list">
+
+              <ul>
+                <li @click='activateChat(index, elem)' v-for='(elem, index) in contacts'>
+                  <div id="li_container" class="clearfix">
+
+                    <img class="profile_pic" :src="elem.avatar" alt="">
+                    <div class="contact_details">
+                      <div class="nameDate">
+
+                        <div  class="contact-name">{{elem.name}}</div>
+                        <span>  {{elem.messages[elem.messages.length - 1].date}}</span>
+
+                      </div>
+
+                      <span class="last_text_preview">
+                        {{elem.messages[elem.messages.length - 1].text}}
+                        {{elem.messages[elem.messages.length - 1].mytext}}
+                      </span>
+
+                    </div>
+
+                  </div><!--end of li_container -->
+                </li>
+              </ul>
+
+            </div>
             <!-- finde della lista contatti-->
           </div>
 
           <div id="chat">
+            <!--conversation window-->
+            <div class="chatWindow">
+              <ul>
+                <li v-for='(elem, index) in currentConversation'>
+                  <span :class="(elem.status == 'received') ? received : sent" >{{elem.mytext}}{{elem.text}}</span>
+                </li>
+
+              </ul>
+            </div>
             <div class="text-input">
               <i class="far fa-grin-alt"></i>
               <i class="fas fa-paperclip"></i>
-              <input id="typer" type="text" name="" value="" placeholder="scrivi un messaggio">
+              <input v-on:keyup.enter='sendNewText' v-model="myLastText" id="typer" type="text" name="" value="" placeholder="scrivi un messaggio">
               <i class="fas fa-microphone"></i>
+              <i @click='sendNewText' class="far fa-paper-plane"></i>
             </div>
           </div>
 
         </main>
 
-      </div>
+      </div><!-- end of VueJs Container-->
 
     </div><!--fine del big_container-->
 
