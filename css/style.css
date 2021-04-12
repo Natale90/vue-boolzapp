@@ -162,9 +162,10 @@ input#find-chat{
 ul{
   list-style-type: none;
   padding:0 10px;
+  border: 1px solid black;
 }
 
-li{
+#chat_list li{
   padding: 5px;
 }
 
@@ -185,7 +186,10 @@ li{
   background-color: #fffaf5;
   position: relative;
   background-image: url(../img/WhatsApp_bg.jpeg);
+}
 
+.chat_window li{
+  margin: 30px 0px;
 }
 
 .text-input{
@@ -210,12 +214,13 @@ li{
 .sentClass{
   background-color: #dbfac6;
   text-align: right;
-  padding: 5px 10px;
+  padding: 10px 15px;
   border-radius: 10px;
 }
 
 .receivedClass{
   background-color: #fff;
-  padding: 5px 10px;
+  padding: 10px 15px;
   border-radius: 10px;
+  margin: 20px 0px;
 }

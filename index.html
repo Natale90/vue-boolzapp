@@ -52,7 +52,7 @@
           <div class="header_right">
             <!--active chat-->
             <div class="liveChat">
-              <img class="profile_pic" :src="activeElem.avatar" alt="">
+              <img v-if="activeElem.avatar" class="profile_pic" :src="activeElem.avatar" alt="">
               <span>{{activeElem.name}}</span>
             </div>
             <div class="chatOpts">
@@ -70,22 +70,22 @@
           <div id="contacts_list">
 
             <div class="search-chat">
-              <i class="fas fa-search"></i>
-              <input id="find-chat" type="text" value="" placeholder="cerca o inizia una nuova chat">
+              <i @click='getFilteredContact' class="fas fa-search"></i>
+              <input v-model='searchInList' id="find-chat" type="text" value="" placeholder="cerca o inizia una nuova chat">
             </div>
             <!-- lista contatti-->
             <div id="chat_list">
 
               <ul>
-                <li @click='activateChat(index, elem)' v-for='(elem, index) in contacts'>
+                <li v-if='elem.name.toLowerCase().includes(searchInList) || elem.name.toUpperCase().includes(searchInList)' @click='activateChat(index, elem)' v-for='(elem, index) in contacts'>
                   <div id="li_container" class="clearfix">
 
                     <img class="profile_pic" :src="elem.avatar" alt="">
                     <div class="contact_details">
                       <div class="nameDate">
 
-                        <div  class="contact-name">{{elem.name}}</div>
-                        <span>  {{elem.messages[elem.messages.length - 1].date}}</span>
+                        <div class="contact-name">{{elem.name}}</div>
+                        <span>  {{elem.messages[elem.messages.length - 1].time}}</span>
 
                       </div>
 
@@ -106,7 +106,7 @@
 
           <div id="chat">
             <!--conversation window-->
-            <div class="chatWindow">
+            <div class="chat_window">
               <ul>
                 <li v-for='(elem, index) in currentConversation'>
                   <span :class="(elem.status == 'received') ? received : sent" >{{elem.mytext}}{{elem.text}}</span>
