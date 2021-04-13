@@ -162,14 +162,22 @@ function init(){
       getDate: function(){
 
         const toDay = new Date();
-        const toDayStr = `${toDay.getDate()}/${toDay.getMonth()}/${toDay.getFullYear()}`;
+        const toDayStr = `${toDay.getDate()}/${toDay.getMonth() + 1}/${toDay.getFullYear()}`;
         return toDayStr;
       },
       // a function to get a string for current time
       getTime:function(){
 
         const now = new Date();
-        const nowStr = `${now.getHours()}:${now.getMinutes()}`
+        const min = now.getMinutes();
+        let nowStr = '';
+
+        if(min < 10){
+
+          nowStr = `${now.getHours()}:0${min}`
+        } else{
+          nowStr = `${now.getHours()}:${min}`
+        }
         return nowStr;
       },
 
