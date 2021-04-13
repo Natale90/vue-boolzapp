@@ -117,9 +117,11 @@ function init(){
       // css classes
       'sent': 'sentClass',
       'received': 'receivedClass',
+      'textIn': 'incomeSpan',
+      'textOut': 'outcomeSpan',
       //find a contant in the list variables
       'searchInList':'',
-      'contact':'',
+      'contactName':'',
       //chatWindow variables
       'currentConversation':[],
       "myMessages": [],
@@ -128,25 +130,37 @@ function init(){
 
       // "activeConversation": [],
       "myLastText": '',
-      myObj:{},
+      // myObj:{},
       notMyObj:{},
 
     }, //end of data
 
+    computed:{
+
+      filteredContacts: function(){
+        return this.contacts.filter((el) =>{
+          if(el.name.toLowerCase().includes(this.searchInList.toLowerCase())){
+            return el;
+          }
+        });
+      }
+    },
+
     methods:{
-      //work in progress for reactive search in contact list.
-      getFilteredContact: function(elem){
 
-        this.contact = elem.name;
-        // let contactUpper = this.contact.toUpperCase();
-        // let contactLower = this.contact.toLowerCase();
-        console.log(this.contact, this.searchInList);
-      },
+      cutText: function (text, length, suffix) { // (check line 91 of HTML) I pass the name of thsi funtion inside th {{ }} and then I pass it the parameters: text, length (decide how long you want the string to be), and then the suffix "..."
 
+        if (text.length > length) {
+          return text.substring(0, length) + suffix;
+        } else {
+          return text; // but if the text is no longer than the length I decided then it gives back the length
+        }
+      }
       // a function to get a string for current date
       getDate: function(){
 
         let [month, date, year] = new Date().toLocaleDateString("it-IT").split("/");
+
         return `${month}/${date}/${year}`;
       },
       // a function to get a string for current time
@@ -157,15 +171,15 @@ function init(){
       },
 
       //activeElem is equal to one element in contacts. currentConversation is equal to the message elem in activeElem
-      activateChat: function(index, elem){
-        this.activeElem = elem;
-        this.currentConversation = elem.messages;
+      activateChat: function(index, contact){
+        this.activeElem = contact;
+        this.currentConversation = contact.messages;
 
       },
       // setting a function that allows to send and recieve text messages.
       sendNewText: function() {
 
-        this.myObj = {
+        let myObj = {
           //init a new object witcth content is the last message the user writes, date, time and status.
           date: this.getDate(),
           time: this.getTime(),
@@ -175,10 +189,11 @@ function init(){
         }
         //if the input is not empty than push the new object into the conversation's array of objects and reset the input area to an empty space.
         if (this.myLastText.length > 0) {
-          this.currentConversation.push(this.myObj);
-          console.log(this.myLastText, this.myObj, this.currentConversation, this.searchInList);
+          this.currentConversation.push(myObj);
+          console.log(this.myLastText, myObj, this.currentConversation, this.searchInList);
           this.myLastText = '';
           //then create a new object for the answer and push it into the current conversetion's array of objects.
+          const  fixedConversation = this.currentConversation;
           setTimeout(() => {
 
             this.notMyObj = {
@@ -189,27 +204,17 @@ function init(){
               status: 'received',
             },
 
-            this.currentConversation.push(this.notMyObj);
+            fixedConversation.push(this.notMyObj);
           }, 1000);
 
         }
 
-        // let v = this
-        // setTimeout(function (){
-        //
-        //   this.notMyObj = {
-        //
-        //     data: new Date(),
-        //     text: 'Ok Man!',
-        //     status: 'received',
-        //   },
-        //
-        //   v.currentConversation.push(this.notMyObj);
-        // }, 2000);
-
-
       },
 
+      removeMessage: function (indexargoument){
+
+        this.currentConversation.splice(indexargoument, 1);
+      },
     },//end of methods
 
   })

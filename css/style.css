@@ -86,10 +86,6 @@ header{
   flex-grow: 1;
 }
 
-.liveChat span{
-  line-height: 100%;
-}
-
 main{
   display: flex;
   height: 600px;
@@ -181,6 +177,9 @@ ul{
   flex-grow: 1;
 }
 
+
+
+/* ----------------rightside chat window and input text classes----------- */
 #chat{
   width: 65%;
   background-color: #fffaf5;
@@ -188,7 +187,12 @@ ul{
   background-image: url(../img/WhatsApp_bg.jpeg);
 }
 
-.chat_window li{
+.chat_window{
+  max-height: calc(100% - 50px);
+  overflow-y: auto;
+}
+
+.chat_window .messageInChat{
   margin: 30px 0px;
 }
 
@@ -212,15 +216,56 @@ ul{
 }
 
 .sentClass{
-  background-color: #dbfac6;
   text-align: right;
+}
+
+.outcomeSpan{
+  background-color: #dbfac6;
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+
+.incomeSpan{
+  background-color: #fff;
   padding: 10px 15px;
   border-radius: 10px;
 }
 
 .receivedClass{
-  background-color: #fff;
-  padding: 10px 15px;
-  border-radius: 10px;
   margin: 20px 0px;
+}
+
+.subTexMn{
+  display: none;
+  cursor:pointer;
+  z-index:20;
+}
+
+.subTexMn ul{
+  background-color: #fff;
+  height: 100%;
+}
+
+.subTexMn .dropOpts{
+  margin: 10px 0px;
+}
+
+.messageInChat span{
+  position: relative;
+}
+
+.messageInChat span.outcomeSpan:hover .subTexMn{
+
+  display: block;
+  position: absolute;
+  right:0;
+  /* transform: translate(-100%, 0); */
+}
+
+.messageInChat span.incomeSpan:hover .subTexMn{
+
+  display: block;
+  position: absolute;
+  left:100%;
+  transform: translate(-100%, 0);
 }

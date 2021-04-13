@@ -70,28 +70,30 @@
           <div id="contacts_list">
 
             <div class="search-chat">
-              <i @click='getFilteredContact' class="fas fa-search"></i>
+              <i class="fas fa-search"></i>
               <input v-model='searchInList' id="find-chat" type="text" value="" placeholder="cerca o inizia una nuova chat">
             </div>
             <!-- lista contatti-->
             <div id="chat_list">
 
               <ul>
-                <li v-if='elem.name.toLowerCase().includes(searchInList) || elem.name.toUpperCase().includes(searchInList)' @click='activateChat(index, elem)' v-for='(elem, index) in contacts'>
+                <li
+                @click='activateChat(index, contact)'
+                v-for='(contact, index) in filteredContacts'>
                   <div id="li_container" class="clearfix">
 
-                    <img class="profile_pic" :src="elem.avatar" alt="">
+                    <img class="profile_pic" :src="contact.avatar" alt="">
                     <div class="contact_details">
                       <div class="nameDate">
 
-                        <div class="contact-name">{{elem.name}}</div>
-                        <span>  {{elem.messages[elem.messages.length - 1].time}}</span>
+                        <div class="contact-name">{{contact.name}}</div>
+                        <span v-if="contact.messages.length">  {{contact.messages[contact.messages.length - 1].time}}</span>
 
                       </div>
 
-                      <span class="last_text_preview">
-                        {{elem.messages[elem.messages.length - 1].text}}
-                        {{elem.messages[elem.messages.length - 1].mytext}}
+                      <span v-if="contact.messages.length" class="last_text_preview">
+                        {{contact.messages[contact.messages.length - 1].text}}
+                        {{contact.messages[contact.messages.length - 1].mytext}}
                       </span>
 
                     </div>
@@ -107,10 +109,20 @@
           <div id="chat">
             <!--conversation window-->
             <div class="chat_window">
-              <ul>
-                <li v-for='(elem, index) in currentConversation'>
-                  <span :class="(elem.status == 'received') ? received : sent" >{{elem.mytext}}{{elem.text}}</span>
-                </li>
+              <ul><!-- one message in the chat-->
+                <li class="messageInChat" :class="(elem.status == 'received') ? received : sent"
+                v-for='(elem, index) in activeElem.messages'>
+                  <span :class="(elem.status == 'received') ? textIn : textOut">
+                    {{elem.mytext}}{{elem.text}}
+                    <i class="fas fa-chevron-down"></i>
+                    <div class="subTexMn">
+                      <ul>
+                        <li class="dropOpts">More info</li>
+                        <li @click="removeMessage(index)" class="dropOpts" >Delate message</li>
+                      </ul>
+                    </div>
+                  </span>
+                </li><!-- end of one message in the chat-->
 
               </ul>
             </div>
