@@ -92,8 +92,7 @@
                       </div>
 
                       <span v-if="contact.messages.length" class="last_text_preview">
-                        {{contact.messages[contact.messages.length - 1].text}}
-                        {{contact.messages[contact.messages.length - 1].mytext}}
+                        {{cutText(contact.messages[contact.messages.length - 1].text, 30, '...' ) }}
                       </span>
 
                     </div>
@@ -114,8 +113,9 @@
                 v-for='(elem, index) in activeElem.messages'>
                   <span :class="(elem.status == 'received') ? textIn : textOut">
                     {{elem.mytext}}{{elem.text}}
-                    <i class="fas fa-chevron-down"></i>
-                    <div class="subTexMn">
+                    <span>{{getDate()}} {{getTime()}}</span>
+                    <i @click="setActiveMessage(elem)" class="fas fa-chevron-down"></i>
+                    <div v-if="elem === activeMessage" class="subTexMn">
                       <ul>
                         <li class="dropOpts">More info</li>
                         <li @click="removeMessage(index)" class="dropOpts" >Delate message</li>

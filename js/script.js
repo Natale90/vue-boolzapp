@@ -30,7 +30,7 @@ function init(){
             {
               date: '10/01/2020',
               time:'16:15',
-              mytext: 'Tutto fatto!',
+              text: 'Tutto fatto!',
               status: 'received'
             }
           ],
@@ -50,7 +50,7 @@ function init(){
             {
               date: '20/03/2020',
               time:'16:30',
-              mytext: 'Bene grazie! Stasera ci vediamo?',
+              text: 'Bene grazie! Stasera ci vediamo?',
               status: 'received'
             },
             {
@@ -80,7 +80,7 @@ function init(){
             {
               date: '28/03/2020',
               time:'10:20',
-              mytext: 'Sicuro di non aver sbagliato chat?',
+              text: 'Sicuro di non aver sbagliato chat?',
               status: 'sent'
             },
             {
@@ -100,7 +100,7 @@ function init(){
             {
               date: '10/01/2020',
               time:'15:30',
-              mytext: 'Lo sai che ha aperto una nuova pizzeria?',
+              text: 'Lo sai che ha aperto una nuova pizzeria?',
               status: 'sent'
             },
             {
@@ -119,6 +119,7 @@ function init(){
       'received': 'receivedClass',
       'textIn': 'incomeSpan',
       'textOut': 'outcomeSpan',
+
       //find a contant in the list variables
       'searchInList':'',
       'contactName':'',
@@ -126,6 +127,7 @@ function init(){
       'currentConversation':[],
       "myMessages": [],
       "activeElem":'',
+      activeMessage: null,
       "mypic": 'img/profile_pic.jpg',
 
       // "activeConversation": [],
@@ -147,27 +149,28 @@ function init(){
     },
 
     methods:{
-
-      cutText: function (text, length, suffix) { // (check line 91 of HTML) I pass the name of thsi funtion inside th {{ }} and then I pass it the parameters: text, length (decide how long you want the string to be), and then the suffix "..."
+      // a function to cut the last message's preview string in the contact list
+      cutText: function (text, length, suffix) {
 
         if (text.length > length) {
           return text.substring(0, length) + suffix;
         } else {
           return text; // but if the text is no longer than the length I decided then it gives back the length
         }
-      }
+      },
       // a function to get a string for current date
       getDate: function(){
 
-        let [month, date, year] = new Date().toLocaleDateString("it-IT").split("/");
-
-        return `${month}/${date}/${year}`;
+        const toDay = new Date();
+        const toDayStr = `${toDay.getDate()}/${toDay.getMonth()}/${toDay.getFullYear()}`;
+        return toDayStr;
       },
       // a function to get a string for current time
       getTime:function(){
 
-        let [hour, minute,] = new Date().toLocaleTimeString("it-IT").split(/:| /);
-        return `${hour}:${minute}`;
+        const now = new Date();
+        const nowStr = `${now.getHours()}:${now.getMinutes()}`
+        return nowStr;
       },
 
       //activeElem is equal to one element in contacts. currentConversation is equal to the message elem in activeElem
@@ -183,7 +186,7 @@ function init(){
           //init a new object witcth content is the last message the user writes, date, time and status.
           date: this.getDate(),
           time: this.getTime(),
-          mytext: this.myLastText,
+          text: this.myLastText,
           status: 'sent'
 
         }
@@ -210,11 +213,24 @@ function init(){
         }
 
       },
+      // a function to toggle the dropdown on a message in the chat
+      setActiveMessage:function (message){
 
-      removeMessage: function (indexargoument){
+        if(this.activeMessage === message){
+          this.activeMessage = null;
+        } else {
 
-        this.currentConversation.splice(indexargoument, 1);
+          this.activeMessage = message;
+        }
       },
+      // a function to remove the message in the chats.
+      removeMessage: function (indexarg){
+
+        this.currentConversation.splice(indexarg, 1);
+        this.activeMessage = null;
+      },
+
+
     },//end of methods
 
   })
