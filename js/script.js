@@ -130,7 +130,7 @@ function init(){
       activeMessage: null,
       "mypic": 'img/profile_pic.jpg',
 
-      // "activeConversation": [],
+
       "myLastText": '',
       // myObj:{},
       notMyObj:{},
@@ -221,6 +221,7 @@ function init(){
         }
 
       },
+      
       // a function to toggle the dropdown on a message in the chat
       setActiveMessage:function (message){
 
@@ -231,6 +232,7 @@ function init(){
           this.activeMessage = message;
         }
       },
+
       // a function to remove the message in the chats.
       removeMessage: function (indexarg){
 

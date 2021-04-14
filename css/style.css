@@ -1,3 +1,4 @@
+/*----------- setting generals css rules for the page -----------*/
 *{
   margin:0;
   padding: 0;
@@ -10,6 +11,8 @@
   display: table;
   clear: both;
 }
+
+/*----------- setting css main sections's rules -----------*/
 
 .big_container{
   width: 100vw;
@@ -33,6 +36,8 @@
   left:50%;
   transform: translate(-50%, -50%);
 }
+
+/*----------- setting header section rules -----------*/
 
 header{
   width: 100%;
@@ -86,13 +91,26 @@ header{
   flex-grow: 1;
 }
 
+
+/*----------- setting css rules for the main section -----------*/
+
 main{
   display: flex;
   height: 600px;
 }
 
-#contacts_list, #chat{
+
+/* left-side contact-list and search-input classes */
+#contacts_list{
  min-height: 100%;
+}
+
+#chat{
+  width: 65%;
+  height: 100%;
+  background-color: #fffaf5;
+  position: relative;
+  background-image: url(../img/WhatsApp_bg.jpeg);
 }
 
 #contacts_list{
@@ -102,6 +120,7 @@ main{
 #chat_list ul{
   list-style-type: none;
   padding:0 10px;
+  background-color: #fff;
 }
 
 #chat_list li{
@@ -178,13 +197,7 @@ ul{
 
 
 
-/* ----------------rightside chat window and input text classes----------- */
-#chat{
-  width: 65%;
-  background-color: #fffaf5;
-  position: relative;
-  background-image: url(../img/WhatsApp_bg.jpeg);
-}
+/* rightside chat-window and input-text classes */
 
 .chat_window{
   height: calc(100% - 50px);
@@ -193,6 +206,11 @@ ul{
 
 .chat_window .messageInChat{
   margin: 30px 0px;
+}
+
+.messageInChat i:hover{
+  transition: 0.5s;
+  transform: scale(1.2);
 }
 
 .text-input{
@@ -235,7 +253,6 @@ ul{
 }
 
 .subTexMn{
-  /* display: none; */
   cursor:pointer;
   z-index:20;
 }

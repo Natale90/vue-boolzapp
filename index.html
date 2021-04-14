@@ -11,7 +11,7 @@
     <!-- link to fontawsome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
     <!-- link to jquery cdn -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script> -->
     <!-- link to vue js cdn -->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <title>Lezione 08-04-2021</title>
@@ -109,13 +109,13 @@
             <!--conversation window-->
             <div class="chat_window">
               <ul><!-- one message in the chat-->
-                <li class="messageInChat" :class="(elem.status == 'received') ? received : sent"
-                v-for='(elem, index) in activeElem.messages'>
-                  <span :class="(elem.status == 'received') ? textIn : textOut">
-                    {{elem.mytext}}{{elem.text}}
+                <li class="messageInChat" :class="(oneMessage.status == 'received') ? received : sent"
+                v-for='(oneMessage, index) in activeElem.messages'>
+                  <span :class="(oneMessage.status == 'received') ? textIn : textOut">
+                    {{oneMessage.text}}
                     <span>{{getDate()}} {{getTime()}}</span>
-                    <i @click="setActiveMessage(elem)" class="fas fa-chevron-down"></i>
-                    <div v-if="elem === activeMessage" class="subTexMn">
+                    <i @click="setActiveMessage(oneMessage)" class="fas fa-chevron-down"></i>
+                    <div v-if="oneMessage === activeMessage" class="subTexMn">
                       <ul>
                         <li class="dropOpts">More info</li>
                         <li @click="removeMessage(index)" class="dropOpts" >Delate message</li>
@@ -124,7 +124,7 @@
                   </span>
                 </li><!-- end of one message in the chat-->
 
-              </ul>
+              </ul><!--end of one message in the chat-->
             </div>
             <div class="text-input">
               <i class="far fa-grin-alt"></i>
