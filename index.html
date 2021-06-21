@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+
+<head>
     <meta charset="utf-8">
 
     <!-- link to media query meta -->
@@ -14,6 +15,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
     <!-- link to jquery cdn -->
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script> -->
+
+    <!-- animotion.css library -->
+    <linkrel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- link to emoji librery -->
+    <script src="https://cdn.jsdelivr.net/npm/emoji-button@latest/dist/index.min.js"></script>
     <!-- link to vue js cdn -->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <title>Boolzap</title>
@@ -22,127 +29,187 @@
     <script src="js/script.js" type="text/javascript"></script>
     <!-- link to css style -->
     <link rel="stylesheet" href="css/style.css">
-  </head>
+</head>
 
-  <body>
+<body>
 
     <div class="big_container">
-      <div class="big_top_bar"></div>
+        <div class="big_top_bar"></div>
 
-      <div id="app" class="container"> <!-- VueJs Container-->
+        <div id="app" class="container">
+            <!-- VueJs Container-->
 
-        <header class="clearfix">
-          <div class="topbar">
-            <div>WhatsApp</div>
-            <div class="opts">
-              <i class="far fa-window-minimize"></i>
-              <i class="far fa-window-maximize"></i>
-              <i class="far fa-window-close"></i>
-            </div>
-          </div>
+            <header class="clearfix">
+                <div class="topbar">
+                    <div>WhatsApp</div>
+                    <div class="opts">
+                        <i class="far fa-window-minimize"></i>
+                        <i class="far fa-window-maximize"></i>
+                        <i class="far fa-window-close"></i>
+                    </div>
+                </div>
 
-          <div class="header_left">
-            <div  class="profile_pic_cont">
-              <img class="profile_pic" :src='mypic' alt="">
-            </div>
-            <div class="">
-              <i class="fas fa-plus"></i>
-              <i class="fas fa-ellipsis-h"></i>
-            </div>
-          </div>
+                <div class="header_left">
+                    <div class="profile_pic_cont">
+                        <img class="profile_pic" :src='mypic' alt="">
+                    </div>
+                    <div class="">
+                        <i class="fas fa-plus"></i>
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                </div>
 
-          <div class="header_right">
-            <!--active chat-->
-            <div class="liveChat">
-              <img v-if="activeElem.avatar" class="profile_pic" :src="activeElem.avatar" alt="">
-              <span>{{activeElem.name}}</span>
-            </div>
-            <div class="chatOpts">
-              <div class="">
-                <i class="fas fa-search"></i>
-                <i class="fas fa-ellipsis-h"></i>
-              </div>
-              <!--end of active chat-->
-            </div>
-          </div>
-        </header>
+                <div class="header_right">
+                    <!--active chat-->
+                    <div class="liveChat">
+                        <img v-if="activeElem.avatar" class="profile_pic" :src="activeElem.avatar" alt="">
+                        <span>{{activeElem.name}}</span>
+                    </div>
+                    <div class="chatOpts">
+                        <div class="">
+                            <i class="fas fa-search"></i>
+                            <i class="fas fa-ellipsis-h"></i>
+                        </div>
+                        <!--end of active chat-->
+                    </div>
+                </div>
+            </header>
 
-        <main>
+            <main>
 
-          <div id="contacts_list">
+                <div id="contacts_list">
 
-            <div class="search-chat">
-              <i class="fas fa-search"></i>
-              <input v-model='searchInList' id="find-chat" type="text" value="" placeholder="cerca o inizia una nuova chat">
-            </div>
-            <!-- lista contatti-->
-            <div id="chat_list">
+                    <div class="search-chat">
+                        <i class="fas fa-search"></i>
+                        <input v-model='searchInList' id="find-chat" type="text" value="" placeholder="cerca o inizia una nuova chat">
+                    </div>
+                    <!-- lista contatti-->
+                    <div id="chat_list">
 
-              <ul>
-                <li
-                @click='activateChat(index, contact)'
-                v-for='(contact, index) in filteredContacts'>
-                  <div id="li_container" class="clearfix">
+                        <ul>
+                            <li @click='activateChat(index, contact)' v-for='(contact, index) in filteredContacts'>
+                                <div id="li_container" class="clearfix">
 
-                    <img class="profile_pic" :src="contact.avatar" alt="">
-                    <div class="contact_details">
-                      <div class="nameDate">
+                                    <img class="profile_pic" :src="contact.avatar" alt="">
+                                    <div class="contact_details">
+                                        <div class="nameDate">
 
-                        <div class="contact-name">{{contact.name}}</div>
-                        <span v-if="contact.messages.length">  {{contact.messages[contact.messages.length - 1].time}}</span>
+                                            <div class="contact-name">{{contact.name}}</div>
+                                            <span v-if="contact.messages.length"> {{contact.messages[contact.messages.length - 1].time}}</span>
 
-                      </div>
+                                        </div>
 
-                      <span v-if="contact.messages.length" class="last_text_preview">
-                        {{cutText(contact.messages[contact.messages.length - 1].text, 30, '...' ) }}
-                      </span>
+                                        <span v-if="contact.messages.length" class="last_text_preview">
+                                            {{cutText(contact.messages[contact.messages.length - 1].text, 30, '...' ) }}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+                                <!--end of li_container -->
+                            </li>
+                        </ul>
 
                     </div>
+                    <!-- finde della lista contatti-->
+                </div>
 
-                  </div><!--end of li_container -->
-                </li>
-              </ul>
+                <div id="chat">
+                    <!--conversation window-->
+                    <div class="chat_window">
+                        <ul>
+                            <!-- one message in the chat-->
+                            <li class="messageInChat" :class="(oneMessage.status == 'received') ? received : sent" v-for='(oneMessage, index) in activeElem.messages'>
+                                <span :class="(oneMessage.status == 'received') ? textIn : textOut">
+                                    {{oneMessage.text}}
+                                    <span>{{getDate()}} {{getTime()}}</span>
+                                    <i @click="setActiveMessage(oneMessage)" class="fas fa-chevron-down"></i>
+                                    <div v-if="oneMessage === activeMessage" class="subTexMn">
+                                        <ul>
+                                            <li class="dropOpts">More info</li>
+                                            <li @click="removeMessage(index)" class="dropOpts">Delate message</li>
+                                        </ul>
+                                    </div>
+                                </span>
+                            </li><!-- end of one message in the chat-->
 
-            </div>
-            <!-- finde della lista contatti-->
-          </div>
-
-          <div id="chat">
-            <!--conversation window-->
-            <div class="chat_window">
-              <ul><!-- one message in the chat-->
-                <li class="messageInChat" :class="(oneMessage.status == 'received') ? received : sent"
-                v-for='(oneMessage, index) in activeElem.messages'>
-                  <span :class="(oneMessage.status == 'received') ? textIn : textOut">
-                    {{oneMessage.text}}
-                    <span>{{getDate()}} {{getTime()}}</span>
-                    <i @click="setActiveMessage(oneMessage)" class="fas fa-chevron-down"></i>
-                    <div v-if="oneMessage === activeMessage" class="subTexMn">
-                      <ul>
-                        <li class="dropOpts">More info</li>
-                        <li @click="removeMessage(index)" class="dropOpts" >Delate message</li>
-                      </ul>
+                        </ul>
+                        <!--end of one message in the chat-->
                     </div>
-                  </span>
-                </li><!-- end of one message in the chat-->
 
-              </ul><!--end of one message in the chat-->
-            </div>
-            <div class="text-input">
-              <i class="far fa-grin-alt"></i>
-              <i class="fas fa-paperclip"></i>
-              <input v-on:keyup.enter='sendNewText' v-model="myLastText" id="typer" type="text" name="" value="" placeholder="scrivi un messaggio">
-              <i class="fas fa-microphone"></i>
-              <i @click='sendNewText' class="far fa-paper-plane"></i>
-            </div>
-          </div>
+                    <!-- right side bottom, input text section -->
+                    <section>
 
-        </main>
+                        <div class="text-input">
 
-      </div><!-- end of VueJs Container-->
+                            <i class="far fa-grin-alt emoji_btn"></i>
 
-    </div><!--fine del big_container-->
+                            <ul v-if='attachFile' class="files-attach animate__animated animate__bounce">
+                                <li class="attach">
+                                    <i class="fas fa-video"></i>
+                                    <p>
+                                        camera
+                                    </p>
+                                </li>
+
+                                <li class="attach">
+                                    <i id="contatto" class="far fa-address-book"></i>
+                                    <p >
+                                        contatto
+                                    </p>
+                                </li>
+
+                                <li class="attach">
+                                    <i id="file" class="far fa-file-alt"></i>
+                                    <p>
+                                        file
+                                    </p>
+                                </li>
+
+                                <li class="attach">
+                                    <i class="far fa-image"></i>
+                                    <p>
+                                        immagini
+                                    </p>
+                                </li>
+
+                                <li class="attach">
+                                    <i class="fas fa-camera"></i>
+                                    <p>
+                                        fotocamera
+                                    </p>
+                                </li>
+                            </ul>
 
 
-  </body>
+
+                            <i @click='attachNewFile()' class="fas fa-paperclip"></i>
+
+                            <input v-on:keyup.enter='sendNewText' v-model="myLastText" id="typer" type="text" placeholder="scrivi un messaggio">
+
+                            <div id="vocal_record_session" v-if='isRecording'>
+                                <i @click='deleteVocal()' class="far fa-times-circle"></i>
+                                <div id="recLight" ></div>
+                                <span>{{recMinutes}}:{{recSeconds}}</span>
+                                <i @click='sendVocal()' class="far fa-check-circle"></i>
+                            </div>
+
+                            <i v-if='!isRecording' @click='startRecording()' class="fas fa-microphone"></i>
+                            <i @click='sendNewText' class="far fa-paper-plane"></i>
+
+                        </div>
+
+                    </section>
+                </div>
+
+            </main>
+
+        </div><!-- end of VueJs Container-->
+
+    </div>
+    <!--fine del big_container-->
+
+
+</body>
+
 </html>
